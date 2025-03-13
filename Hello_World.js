@@ -1,14 +1,15 @@
-const { createServer } = require('node:http');
+const express = require('express');
+const app = express();
 
-const hostname = '145.24.222.149';
-const port = 80;
+const PORT = 3000;
+const HOST = '145.24.222.149'; // Allows access from any IP
 
-const server = createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+app.use(express.static('public')); // Serves static files if needed
+
+app.get('/', (req, res) => {
+    res.send('Server is running!');
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(PORT, HOST, () => {
+    console.log(`Server is running at http://${HOST}:${PORT}`);
 });
